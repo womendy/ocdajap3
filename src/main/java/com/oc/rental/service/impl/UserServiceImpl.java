@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
   private JwtUtil jwtUtil;
   private AuthenticationManager authenticationManager;
 
-  public UserServiceImpl(UserRepository userRepository) {
+  public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, AuthenticationManager authenticationManager) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
     this.jwtUtil = jwtUtil;
