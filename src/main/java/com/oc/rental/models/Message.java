@@ -2,12 +2,14 @@ package com.oc.rental.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@Entity
+@Entity(name = "message")
 @NoArgsConstructor
-
+@Getter
+@Setter
 public class Message {
 
   @Id
