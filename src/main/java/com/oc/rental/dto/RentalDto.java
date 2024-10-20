@@ -1,19 +1,31 @@
 package com.oc.rental.dto;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+import org.springframework.lang.NonNull;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.io.Serializable;
 
-//mapstruck
-@Data
-public class RentalDto {
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Accessors(chain = true)
+public class RentalDto implements Serializable {
   private long id;
+  @NonNull
   private String name;
+  @NonNull
   private int surface;
+  @NonNull
   private int price;
+  @NonNull
   private  String description;
-  private long owner_id;
+  private long ownerId;
   private String picture;
 
 }

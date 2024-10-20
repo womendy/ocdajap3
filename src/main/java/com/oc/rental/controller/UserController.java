@@ -1,5 +1,6 @@
 package com.oc.rental.controller;
 
+import com.oc.rental.exception.NotFoundException;
 import com.oc.rental.models.User;
 import com.oc.rental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,12 @@ public class UserController {
   private UserService userService;
 
   @Autowired
-  public UserController(UserService userService){this.userService=userService;}
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
 
   @GetMapping("/{id}")
-  public User getById(@PathVariable("id") long id){return userService.findUserById(id).orElseThrow();}
+  public User getById(@PathVariable("id") long id) {
+    return userService.findUserById(id).orElseThrow(() -> new NotFoundException("User not found"));
+  }
 }

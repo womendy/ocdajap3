@@ -9,12 +9,10 @@ import com.oc.rental.repository.impl.UserRepository;
 import com.oc.rental.service.RentalService;
 import com.oc.rental.utils.ImageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +49,11 @@ public class RentalServiceImpl implements RentalService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Rental rental = new Rental()
-                .surface(rentalCreationDto.getSurface())
-                .price(rentalCreationDto.getPrice())
-                .description(rentalCreationDto.getDescription())
-                .owner(userCreator)
-                .picture(ImageHelper.saveImage(rentalCreationDto.getPicture()));
+                .setSurface(rentalCreationDto.getSurface())
+                .setPrice(rentalCreationDto.getPrice())
+                .setDescription(rentalCreationDto.getDescription())
+                .setOwner(userCreator)
+                .setPicture(ImageHelper.saveImage(rentalCreationDto.getPicture()));
 
         rental.setName(rentalCreationDto.getName());
 
@@ -72,13 +70,11 @@ public class RentalServiceImpl implements RentalService {
         Rental existingRental = rentalRepository.findById(id).orElseThrow();
 
         // Update the properties of the existing rental with the values from the updatedRental object
-        existingRental.surface(updatedRental.getSurface());
-        existingRental.price(updatedRental.getPrice());
+        existingRental.setSurface(updatedRental.getSurface());
+        existingRental.setPrice(updatedRental.getPrice());
         existingRental.setName(updatedRental.getName());
-        existingRental.description(updatedRental.getDescription());
+        existingRental.setDescription(updatedRental.getDescription());
         existingRental.setUpdated_at(LocalDate.now());
-
-        // Update other properties as needed
 
         // Save the updated rental
         return Optional.of(rentalRepository.save(existingRental));

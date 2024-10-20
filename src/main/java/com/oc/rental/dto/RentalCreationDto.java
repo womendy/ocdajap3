@@ -3,8 +3,6 @@ package com.oc.rental.dto;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 @Data
 public class RentalCreationDto {
   private String name;

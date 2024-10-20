@@ -1,11 +1,11 @@
 package com.oc.rental.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class HttpMessageDto {
-  private String message;
-  public HttpMessageDto(String message) {
-    this.message = message;
-  }
+  protected String message;
 }

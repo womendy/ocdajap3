@@ -1,18 +1,19 @@
 package com.oc.rental.models;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
-@NoArgsConstructor
+
 @Getter
 @Setter
-
+@Accessors(chain = true)
 public class CoreEntity implements Serializable {
-    private String name;
-    private LocalDate created_at;
-    private LocalDate updated_at;
+    protected String name;
+    protected LocalDate created_at;
+    protected LocalDate updated_at;
 }
+
+
