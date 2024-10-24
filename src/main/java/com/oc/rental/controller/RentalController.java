@@ -21,7 +21,6 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 public class RentalController {
   private final JwtUtil jwtUtil;
   private RentalService rentalService;
-  private UserService userService;
 
   @Autowired
   public RentalController(RentalService rentalService, JwtUtil jwtUtil) {
@@ -37,7 +36,7 @@ public class RentalController {
   }
 
   @GetMapping("/{id}")
-  public RentalDto getByid(@PathVariable(value = "id",required = false) long id,@RequestHeader("Authorization") String token) throws NotFoundException {
+  public RentalDto getByid(@PathVariable(value = "id",required = false) Long id,@RequestHeader("Authorization") String token) throws NotFoundException {
     return rentalService.getRentalById(id).map(RentalMapper::toDto).
             orElseThrow(() -> new NotFoundException("Rental not found"));
   }
