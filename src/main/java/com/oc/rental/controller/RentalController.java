@@ -7,7 +7,6 @@ import com.oc.rental.dto.RentalDto;
 import com.oc.rental.exception.NotFoundException;
 import com.oc.rental.mapper.RentalMapper;
 import com.oc.rental.service.RentalService;
-import com.oc.rental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
