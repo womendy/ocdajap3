@@ -1,10 +1,7 @@
 package com.oc.rental.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -12,7 +9,9 @@ import java.util.List;
 @Setter
 @Entity
 public class User extends CoreEntity {
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
   @Column(nullable = false, unique = true)
   private String email;
   @OneToMany(mappedBy = "owner")

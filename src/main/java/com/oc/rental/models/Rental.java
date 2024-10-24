@@ -1,27 +1,37 @@
 package com.oc.rental.models;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import lombok.Data;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Accessors(chain = true)
 @Entity
 public class Rental extends CoreEntity {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
   @Column(nullable = false)
   private int surface;
   @Column(nullable = false)
   private int price;
-  @OneToMany(mappedBy = "rental")
-  private List<Picture> picture;
-  @OneToMany(mappedBy = "rental")
-  private List<Message> messages;
+  private String picture;
   @Column(nullable = false)
   private String description;
   @ManyToOne
   private User owner;
+
 
 }
