@@ -1,5 +1,6 @@
 package com.oc.rental.models;
 
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -11,7 +12,8 @@ import java.time.LocalDate;
 @Setter
 @Accessors(chain = true)
 public class CoreEntity implements Serializable {
-    protected String name;
+    private String name;
+
     protected LocalDate created_at;
     protected LocalDate updated_at;
 }

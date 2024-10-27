@@ -1,6 +1,7 @@
 package com.oc.rental.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ public class User extends CoreEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
+  @Email
   @Column(nullable = false, unique = true)
   private String email;
   @OneToMany(mappedBy = "owner")
@@ -20,4 +22,6 @@ public class User extends CoreEntity {
   private List<Message> messages;
   @Column(nullable = false)
   private String password;
+
+
 }
