@@ -8,7 +8,8 @@ import com.oc.rental.dto.RentalsDto;
 import com.oc.rental.exception.NotFoundException;
 import com.oc.rental.mapper.RentalMapper;
 import com.oc.rental.service.RentalService;
-import jakarta.validation.Valid;
+import com.oc.rental.utils.ImageHelper;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,8 +44,11 @@ public class RentalController {
 
     @PostMapping(consumes = MULTIPART_FORM_DATA_VALUE)
     public RentalDto createRental(@ModelAttribute RentalCreationDto rentalCreationDto) {
+        String imageUrl = ImageHelper.saveImage(rentalCreationDto.getPicture()); // Save the image
+        rentalCreationDto.setPicture(imageUrl);
         return rentalService.createRental(rentalCreationDto).map(RentalMapper::toDto).orElseThrow();
     }
+
 
     @PutMapping("/{id}")
     public HttpMessageDto updateRental(@PathVariable("id") long id, @RequestBody RentalDto updatedRental) {

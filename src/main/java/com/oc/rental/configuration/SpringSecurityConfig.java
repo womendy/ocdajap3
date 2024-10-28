@@ -40,6 +40,7 @@ public class SpringSecurityConfig {
                             .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                             .anyRequest().authenticated();
                 })
+                .exceptionHandling(e -> e.authenticationEntryPoint(jwtAuthenticationEntryPoint()))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
@@ -49,13 +50,13 @@ public class SpringSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));  // Set frontend URL explicitly
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-        configuration.setAllowCredentials(true);  // Allow credentials (important for cookies/auth tokens)
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);  // Apply to all endpoints
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 
@@ -80,12 +81,17 @@ public class SpringSecurityConfig {
     }
 
     @Bean
-    public JwtAuthenticationEntryPoint jwtAuthenticationFilter() {
+    public JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint() {
         return new JwtAuthenticationEntryPoint();
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
         return new RentalUserDetailsService();
+    }
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter();
     }
 }

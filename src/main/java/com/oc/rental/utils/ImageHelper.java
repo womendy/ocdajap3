@@ -3,6 +3,9 @@ package com.oc.rental.utils;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,12 +36,15 @@ public class ImageHelper {
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
-
+            File directory = new File(UPLOAD_DIR);
+            if (!directory.exists()) {
+                directory.mkdirs(); // Creates the directory and any necessary parent directories
+            }
             // Save the file to the target location
             Path filePath = uploadPath.resolve(fileName);
             Files.copy(file.getInputStream(), filePath);
 
-            return UPLOAD_DIR + fileName;
+            return  "/" + UPLOAD_DIR + fileName;
 
         } catch (IOException e) {
             e.printStackTrace();

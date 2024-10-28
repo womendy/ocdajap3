@@ -9,8 +9,10 @@
 /home/solange/IdeaProjects/ocdajap3_backend/rental/src/main/java/com/oc/rental/dto/TokenDto.java
 /home/solange/IdeaProjects/ocdajap3_backend/rental/src/main/java/com/oc/rental/configuration/JwtAuthenticationEntryPoint.java
 /home/solange/IdeaProjects/ocdajap3_backend/rental/src/main/java/com/oc/rental/service/impl/MessageServiceImpl.java
+/home/solange/IdeaProjects/ocdajap3_backend/rental/src/main/java/com/oc/rental/dto/RentalsDto.java
 /home/solange/IdeaProjects/ocdajap3_backend/rental/src/main/java/com/oc/rental/controller/RentalController.java
 /home/solange/IdeaProjects/ocdajap3_backend/rental/src/main/java/com/oc/rental/service/UserService.java
+/home/solange/IdeaProjects/ocdajap3_backend/rental/src/main/java/com/oc/rental/configuration/JwtAuthenticationFilter.java
 /home/solange/IdeaProjects/ocdajap3_backend/rental/src/main/java/com/oc/rental/mapper/RentalMapper.java
 /home/solange/IdeaProjects/ocdajap3_backend/rental/src/main/java/com/oc/rental/controller/MessageController.java
 /home/solange/IdeaProjects/ocdajap3_backend/rental/src/main/java/com/oc/rental/configuration/RentalUserDetailsService.java

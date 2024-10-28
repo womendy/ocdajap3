@@ -10,4 +10,13 @@ import java.util.List;
 @Accessors(chain = true)
 public class RentalsDto {
     List<RentalDto> rentals;
+
+    public List<RentalDto> getRentals() {
+        return rentals;
+    }
+
+    public RentalsDto setRentals(List<RentalDto> rentals) {
+        this.rentals = rentals;
+        return this;
+    }
 }

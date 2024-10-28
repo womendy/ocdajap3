@@ -10,5 +10,18 @@ public class RentalCreationDto {
   private int price;
   private  String description;
   private MultipartFile picture;
+  private String pictureUrl; // Add a new field for URL
 
+  public String getPictureUrl() {
+    if (picture != null) {
+      return "/rental-images/" + picture.getOriginalFilename();
+    }
+    return null;
+  }
+
+
+
+
+  public void setPicture(String imageUrl) {
+  }
 }
