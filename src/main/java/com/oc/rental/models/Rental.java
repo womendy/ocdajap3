@@ -20,9 +20,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Entity
 public class Rental extends CoreEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private long id;
+
   @Column(nullable = false)
   private int surface;
   @Column(nullable = false)

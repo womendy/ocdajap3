@@ -19,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-public class JwtAuthenticationEntryPoint extends OncePerRequestFilter implements AuthenticationEntryPoint {
+public class JwtAuthenticationEntryPoint extends OncePerRequestFilter  {
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -58,13 +58,6 @@ public class JwtAuthenticationEntryPoint extends OncePerRequestFilter implements
       }
     }
 
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response,
-                         AuthenticationException authException) throws IOException {
 
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.getWriter().write("{\"error\": \"Unauthorized\"}");
-    }
 }
 
