@@ -26,6 +26,8 @@ com/oc/rental/service/RentalService.class
 com/oc/rental/dto/HttpMessageDto.class
 com/oc/rental/service/UserService.class
 com/oc/rental/exception/RentalExceptionHandler.class
+com/oc/rental/configuration/CorsConfig.class
+com/oc/rental/mapper/UserMapper.class
 com/oc/rental/service/impl/RentalServiceImpl.class
 com/oc/rental/utils/ImageHelper.class
 com/oc/rental/controller/MessageController.class
