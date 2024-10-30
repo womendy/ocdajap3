@@ -13,6 +13,7 @@ public interface RentalService {
     public Optional<List<Rental>> getAllRental();
     public Optional<Rental> createRental(RentalCreationDto rentalCreationDto);
     public Optional<Rental> updateRental(long id, RentalDto rental);
-
+    public Optional<List<RentalDto>> getRentalsByOwnerId(Long ownerId);
+    public Optional<List<RentalDto>> getRentalsForAuthenticatedOwner();
 
 }

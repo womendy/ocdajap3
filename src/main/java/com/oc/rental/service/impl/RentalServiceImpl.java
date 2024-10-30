@@ -2,10 +2,12 @@ package com.oc.rental.service.impl;
 
 import com.oc.rental.dto.RentalCreationDto;
 import com.oc.rental.dto.RentalDto;
+import com.oc.rental.mapper.RentalMapper;
 import com.oc.rental.models.Rental;
 import com.oc.rental.models.User;
 import com.oc.rental.repository.impl.RentalRepository;
 import com.oc.rental.repository.impl.UserRepository;
+import com.oc.rental.service.AuthenticatedUserService;
 import com.oc.rental.service.RentalService;
 import com.oc.rental.utils.ImageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +19,23 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 
 @Service
 public class RentalServiceImpl implements RentalService {
     private RentalRepository rentalRepository;
     private UserRepository userRepository;
+    private AuthenticatedUserService authenticatedUserService;
+
 
 
     @Autowired
     public RentalServiceImpl(RentalRepository rentalRepository, UserRepository userRepository) {
         this.rentalRepository = rentalRepository;
         this.userRepository = userRepository;
+        this.authenticatedUserService = authenticatedUserService;
+
     }
 
     @Override
@@ -40,6 +48,20 @@ public class RentalServiceImpl implements RentalService {
         List<Rental> rentals = new ArrayList<>();
         rentalRepository.findAll().forEach(rentals::add);
         return Optional.of(rentals);
+    }
+
+    @Override
+    public Optional<List<RentalDto>> getRentalsByOwnerId(Long ownerId) {
+        List<RentalDto> rentals = rentalRepository.findById(ownerId).stream()
+                .map(RentalMapper::toDto)
+                .collect(Collectors.toList());
+        return Optional.of(rentals);
+    }
+
+    @Override
+    public Optional<List<RentalDto>> getRentalsForAuthenticatedOwner() {
+        Long ownerId = authenticatedUserService.getAuthenticatedOwnerId();
+        return getRentalsByOwnerId(ownerId);
     }
 
     @Override
