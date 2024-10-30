@@ -15,7 +15,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
-@Jacksonized
 @Accessors(chain = true)
 public class RentalDto implements Serializable {
   private long id;
