@@ -1,26 +1,26 @@
 package com.oc.rental.models;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Accessors(chain = true)
-@Entity
-public class Rental extends CoreEntity {
-
+@Entity(name = "rental")
+@ToString
+public class Rental {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
+  private String name;
+  protected LocalDate created_at;
+  protected LocalDate updated_at;
   @Column(nullable = false)
   private int surface;
   @Column(nullable = false)

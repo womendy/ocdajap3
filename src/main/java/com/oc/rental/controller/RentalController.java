@@ -10,6 +10,7 @@ import com.oc.rental.mapper.RentalMapper;
 import com.oc.rental.service.RentalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class RentalController {
         this.rentalService = rentalService;
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public RentalsDto getAllRental() {
         return new RentalsDto().setRentals(
                 rentalService.getAllRental()

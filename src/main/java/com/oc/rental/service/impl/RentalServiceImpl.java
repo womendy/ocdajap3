@@ -44,10 +44,18 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public Optional<Rental> createRental(RentalCreationDto rentalCreationDto) {
-        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userCreator = userRepository.findByEmail(principal.getUsername())
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email;
+        if (principal instanceof UserDetails) {
+            email = ((UserDetails) principal).getUsername();
+        } else {
+            throw new RuntimeException("Unexpected principal type");
+        }
+
+        User userCreator = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        // Create and save rental as before
         Rental rental = new Rental()
                 .setSurface(rentalCreationDto.getSurface())
                 .setPrice(rentalCreationDto.getPrice())
@@ -56,7 +64,6 @@ public class RentalServiceImpl implements RentalService {
                 .setPicture(ImageHelper.saveImage(rentalCreationDto.getPicture()));
 
         rental.setName(rentalCreationDto.getName());
-
         LocalDate now = LocalDate.now();
         rental.setUpdated_at(now);
         rental.setCreated_at(now);

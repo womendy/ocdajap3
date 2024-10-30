@@ -21,6 +21,7 @@ com/oc/rental/controller/RentalController.class
 com/oc/rental/exception/NotFoundException.class
 com/oc/rental/dto/UserDto.class
 com/oc/rental/repository/impl/UserRepository.class
+com/oc/rental/dto/RentalsDto.class
 com/oc/rental/controller/AuthentificationController.class
 com/oc/rental/service/RentalService.class
 com/oc/rental/dto/HttpMessageDto.class

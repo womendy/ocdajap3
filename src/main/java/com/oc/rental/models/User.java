@@ -7,13 +7,20 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 @Getter
 @Setter
-@Entity
-public class User extends CoreEntity implements UserDetails {
+@Entity(name = "user")
+public class User implements UserDetails {
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private long id;
+  private String name;
 
+  protected LocalDate created_at;
+  protected LocalDate updated_at;
   @Email
   @Column(nullable = false, unique = true)
   private String email;
