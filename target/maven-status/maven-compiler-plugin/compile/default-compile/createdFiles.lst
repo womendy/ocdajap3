@@ -13,14 +13,15 @@ com/oc/rental/dto/HttpErrorMessage.class
 com/oc/rental/mapper/RentalMapper.class
 com/oc/rental/service/impl/UserServiceImpl.class
 com/oc/rental/repository/impl/MessageRepository.class
-com/oc/rental/models/CoreEntity.class
 com/oc/rental/configuration/JwtUtil.class
 com/oc/rental/models/Rental.class
 com/oc/rental/dto/TokenDto.class
 com/oc/rental/controller/RentalController.class
 com/oc/rental/exception/NotFoundException.class
 com/oc/rental/dto/UserDto.class
+com/oc/rental/service/AuthenticatedUserService.class
 com/oc/rental/repository/impl/UserRepository.class
+com/oc/rental/controller/ImageController.class
 com/oc/rental/dto/RentalsDto.class
 com/oc/rental/controller/AuthentificationController.class
 com/oc/rental/service/RentalService.class

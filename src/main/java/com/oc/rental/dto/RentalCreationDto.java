@@ -11,4 +11,6 @@ public class RentalCreationDto {
   private  String description;
   private MultipartFile picture;
 
+
+
 }

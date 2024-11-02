@@ -28,5 +28,10 @@ public class RentalDto implements Serializable {
   private  String description;
   private long ownerId;
   private String picture;
+  private static final String BASE_URL = "http://localhost:8080/";
 
+  public String getPicture() {
+    return picture != null && !picture.startsWith("http") ? BASE_URL + picture : picture;
+
+  }
 }

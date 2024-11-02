@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.stream.StreamSupport.stream;
+
 
 @Service
 public class RentalServiceImpl implements RentalService {
@@ -28,6 +30,7 @@ public class RentalServiceImpl implements RentalService {
     private UserRepository userRepository;
     private AuthenticatedUserService authenticatedUserService;
 
+    private static final String BASE_URL = "http://localhost:8080/";
 
 
     @Autowired
@@ -47,6 +50,16 @@ public class RentalServiceImpl implements RentalService {
     public Optional<List<Rental>> getAllRental() {
         List<Rental> rentals = new ArrayList<>();
         rentalRepository.findAll().forEach(rentals::add);
+
+        List<RentalDto> rentalDtos = rentals.stream()
+                .map(RentalMapper::toDto)
+                .peek(rentalDto -> {
+                    if (rentalDto.getPicture() != null && !rentalDto.getPicture().startsWith("http")) {
+                        rentalDto.setPicture(BASE_URL + rentalDto.getPicture());
+                    }
+                })
+                .collect(Collectors.toList());
+
         return Optional.of(rentals);
     }
 
@@ -54,9 +67,15 @@ public class RentalServiceImpl implements RentalService {
     public Optional<List<RentalDto>> getRentalsByOwnerId(Long ownerId) {
         List<RentalDto> rentals = rentalRepository.findById(ownerId).stream()
                 .map(RentalMapper::toDto)
+                .peek(rentalDto -> {
+                    if (rentalDto.getPicture() != null && !rentalDto.getPicture().startsWith("http")) {
+                        rentalDto.setPicture(BASE_URL + rentalDto.getPicture());
+                    }
+                })
                 .collect(Collectors.toList());
         return Optional.of(rentals);
     }
+
 
     @Override
     public Optional<List<RentalDto>> getRentalsForAuthenticatedOwner() {
