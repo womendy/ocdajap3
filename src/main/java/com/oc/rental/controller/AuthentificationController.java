@@ -4,8 +4,8 @@ import com.oc.rental.dto.TokenDto;
 import com.oc.rental.dto.UserDto;
 import com.oc.rental.models.User;
 import com.oc.rental.service.UserService;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -36,10 +36,10 @@ public class AuthentificationController {
 
 
     @GetMapping("me")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "User found", response = UserDto.class),
-            @ApiResponse(code = 401, message = "Unauthorized")
-    })
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "User found", response = UserDto.class),
+//            @ApiResponse(code = 401, message = "Unauthorized")
+//    })
     public UserDetails getAuthenticatedUser(@AuthenticationPrincipal UserDetails userPrincipal) {
         if (userPrincipal == null) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");

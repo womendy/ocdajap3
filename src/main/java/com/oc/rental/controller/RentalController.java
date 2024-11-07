@@ -7,18 +7,14 @@ import com.oc.rental.dto.RentalDto;
 import com.oc.rental.dto.RentalsDto;
 import com.oc.rental.exception.NotFoundException;
 import com.oc.rental.mapper.RentalMapper;
-import com.oc.rental.models.Rental;
 import com.oc.rental.service.RentalService;
-import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
@@ -32,7 +28,7 @@ public class RentalController {
         this.rentalService = rentalService;
     }
 
-
+    @SecurityRequirement(name = "BearerAuth")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public RentalsDto getAllRental() {
         return new RentalsDto().setRentals(
@@ -40,9 +36,9 @@ public class RentalController {
                         .map(rentals -> rentals.stream().map(RentalMapper::toDto).toList())
                         .orElseGet(ArrayList::new));
     }
-
+    @SecurityRequirement(name = "BearerAuth")
     @GetMapping("/{id}")
-    public RentalDto getByid(@PathVariable(value = "id", required = false) Long id, @RequestHeader("Authorization") String token) throws NotFoundException {
+    public RentalDto getByid(@PathVariable(value = "id", required = false) Long id) throws NotFoundException {
         return rentalService.getRentalById(id).map(RentalMapper::toDto).
                 orElseThrow(() -> new NotFoundException("Rental not found"));
     }
