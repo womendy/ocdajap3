@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
+@SecurityRequirement(name = "bearerAuth")
 
 @RestController
 @RequestMapping("/api/rentals")
@@ -28,7 +29,7 @@ public class RentalController {
         this.rentalService = rentalService;
     }
 
-    @SecurityRequirement(name = "BearerAuth")
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public RentalsDto getAllRental() {
         return new RentalsDto().setRentals(
@@ -36,7 +37,8 @@ public class RentalController {
                         .map(rentals -> rentals.stream().map(RentalMapper::toDto).toList())
                         .orElseGet(ArrayList::new));
     }
-    @SecurityRequirement(name = "BearerAuth")
+    @SecurityRequirement(name = "bearerAuth")
+
     @GetMapping("/{id}")
     public RentalDto getByid(@PathVariable(value = "id", required = false) Long id) throws NotFoundException {
         return rentalService.getRentalById(id).map(RentalMapper::toDto).

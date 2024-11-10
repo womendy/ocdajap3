@@ -52,7 +52,7 @@ public class SpringSecurityConfig {
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);  // Allow credentials (important for cookies/auth tokens)
-
+        configuration.addExposedHeader("Authorization");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);  // Apply to all endpoints
         return source;
@@ -88,3 +88,5 @@ public class SpringSecurityConfig {
         return new RentalUserDetailsService();
     }
 }
+
+
